@@ -1,5 +1,6 @@
 <template>
     <welcomeview></welcomeview>
+    <h3>Deactivate the desired user by clicking on the green button</h3>
     <div>
         <ul class="user-list">
             <li v-for="user in users" :key="user.id">

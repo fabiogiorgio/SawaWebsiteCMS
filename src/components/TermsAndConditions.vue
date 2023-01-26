@@ -1,6 +1,8 @@
 <template>
     <welcomeview></welcomeview>
-    <h3>Terms and Conditions</h3>
+    <h3>Insert text in the textbox to update Terms and Conditions<br>
+        First textbox stands for Terms, second for Conditions
+    </h3>
     <div class="container">
         <div class="input-container">
             <textarea v-model="title" class="text-area"></textarea>

@@ -1,5 +1,6 @@
 <template>
     <welcomeview></welcomeview>
+    <h3>Insert the new desired password in the textbox to update it</h3>
     <div class="container">
         <div class="form-group">
             <input type="password" v-model="newPassword" class="form-control" placeholder="New Password">

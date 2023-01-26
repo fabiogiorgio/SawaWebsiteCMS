@@ -1,6 +1,6 @@
 <template>
     <welcomeview></welcomeview>
-    <h3>Disclaimer:</h3>
+    <h3>Insert text in the textbox to update a Disclaimer:</h3>
     <div class="container">
         <div class="input-container">
             <textarea v-model="textArea" class="text-area"></textarea>
