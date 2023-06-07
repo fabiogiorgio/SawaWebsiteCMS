@@ -3,8 +3,8 @@
     <form name="login-form">
       <img src="@/assets/SawaLogo.png" alt="Logo">
       <div class="mb-3">
-        <label for="username">Username: </label>
-        <input type="text" id="username" v-model="input.username" />
+        <label for="userName">Username: </label>
+        <input type="text" id="userName" v-model="input.userName" />
       </div>
       <div class="mb-3">
         <label for="password">Password: </label>
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       input: {
-        username: "",
+        userName: "",
         password: ""
       },
       output: "",
@@ -36,15 +36,18 @@ export default {
   methods: {
     login() {
       //make sure username OR password are not empty
-      if (this.input.username != "" || this.input.username != "") {
+      if (this.input.userName != "" || this.input.userName != "") {
 
-        axios.post('https://sawacms.azurewebsites.net/api/Login', {
-          username: this.input.username ,
+        axios.post('http://localhost:8080/api/login', {
+          userName: this.input.userName ,
           password: this.input.password
         })
           .then(response => {
+             const token = response.data.bearerToken;
+            localStorage.setItem('bearerToken', token); // Store the token in local storage
+            console.log(token)
             this.$store.commit(`auth/${SET_AUTHENTICATION}`, true);
-            this.$store.commit(`auth/${SET_USERNAME}`, this.input.username);
+            this.$store.commit(`auth/${SET_USERNAME}`, this.input.userName);
             this.$store.commit(`auth/${SET_ID}`, response.data);
             this.loggedIn = true;
             this.$router.push('/home')

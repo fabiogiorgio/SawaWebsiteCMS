@@ -4,7 +4,7 @@
     <div>
         <ul class="user-list">
             <li v-for="user in users" :key="user.id">
-                {{ user.name }} (ID: {{ user.id }})
+                {{ user.firstName }} (ID: {{ user.id }})
                 <button @click="deactivateUser(user.id)">Deactivate</button>
             </li>
         </ul>
@@ -29,13 +29,23 @@ export default {
     },
     methods: {
         getUsers(){
-            axios.get('https://sawacms.azurewebsites.net/api/users')
+            const token = localStorage.getItem('bearerToken');
+            console.log(token)
+            const header = {
+            'Content-Type' : 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${token}`,
+            'Access-Control-Allow-Origin' : 'http://localhost:8082/',
+            'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            }
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+           axios.get('http://localhost:8080/api/users', { headers: header
+            })
             .then(response => {
                 this.users = response.data;
             });
         },
         deactivateUser(id) {
-            axios.put(`https://sawacms.azurewebsites.net/api/users/${id}/false`)
+            axios.put(``)
                 .then(() => {
                     this.getUsers()
                 });
